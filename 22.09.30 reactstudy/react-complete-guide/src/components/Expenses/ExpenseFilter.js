@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./ExtenseFilter.css";
+import "./ExpenseFilter.css";
 
 const ExpensesFilter = (props) => {
 
