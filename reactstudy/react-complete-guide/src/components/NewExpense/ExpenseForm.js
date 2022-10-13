@@ -44,11 +44,11 @@ const ExpenseForm = (props) => {
     const submitHandler = (event) =>{
         event.preventDefault(); // 기본자바스크립트 동작, submit하면 자동으로 페이지가 이동되는걸 막아준다 리액트라 페이지 리로딩이 되면 안되기 때문
 
-        const expenseData = {
-          title : enteredTitle,
-          amount : enteredAmount,
-          date : new Date(enteredDate)
-        };
+    const expenseData = {
+      title: enteredTitle,
+      amount: +enteredAmount,
+      date: new Date(enteredDate),
+    };
 
         console.log(expenseData);
         
@@ -90,7 +90,7 @@ const ExpenseForm = (props) => {
             </div>
           </div>
           <div className="new-expense__actions">
-            <button type="submit" onClick={addFormChangehandler}>
+            <button type="button" onClick={props.onCancel}>
               Cancle
             </button>
             <button type="submit">Add express</button>
