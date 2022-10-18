@@ -1,0 +1,3 @@
+const Colors = {
+    promary500 : ''
+}
