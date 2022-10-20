@@ -3,20 +3,47 @@ import {  TextInput, View, StyleSheet, Alert, Button } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import InputDateModal from "./InputDateModal";
 import { Modal } from "react-native";
+import CalendarModal from "./CalendarModal";
 
 
-function RoutinInputScreen(){
+function RoutinInputScreen(props){
 
-    const [enteredNumber, setEnteredNumber] = useState("");
-    const [enterShowModal, setEnterShowModal] = useState(false)
 
-    function ShowDateModal(){
-        setEnterShowModal(true)
+  //=============== 입력창 내용들 관련 ====================
+  const [enteredRoutine, setEnteredRoutine] = useState(''); // 운동명
+    const [enteredNumber, setEnteredNumber] = useState(" "); // 갯수
+    const [enteredSets, setEnteredSets] = useState(" "); // 셋트개수
+    const [enteredDate , setEnteredDate] = useState(''); // 입력할 날짜
+
+    
+    function routineInputHandler(enteredText) {
+      setEnteredRoutine(enteredText);
     }
 
     function numberInputHandler(enteredText) {
-        setEnteredNumber(enteredText);
+      setEnteredNumber(enteredText);
     }
+
+ 
+    function setsInputhandler(){
+
+    }
+    function dateInputHandler(){
+      // 넘겨준 날짜값 받아오기
+      // setEnteredDate(props.inputDate);
+    }
+  //=============== 입력창 내용들 관련
+
+
+
+//=============== 날짜 선택 달력 관련=========
+    const [enterShowModal, setEnterShowModal] = useState(false)
+
+    function ShowDateModal(){
+      setEnterShowModal(true)
+    }
+//=============== 날짜 선택 달력 관련=========
+
 
 
     function resetInputHandler() {
@@ -52,8 +79,8 @@ function RoutinInputScreen(){
           placeholder="운동명"
           autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
           autoCorrect={false}
-          onChangeText={numberInputHandler}
-          value={enteredNumber}
+          onChangeText={routineInputHandler}
+          value={enteredRoutine}
           maxLength={5}
         />
         <TextInput
@@ -66,7 +93,7 @@ function RoutinInputScreen(){
           value={enteredNumber}
           maxLength={5}
         />
-        {/* 운동 부위 option */}
+        {/* 운동 부위 drop바 하고싶다 option */}
         <TextInput
           style={styles.numberInput}
           placeholder="부위"
@@ -78,9 +105,6 @@ function RoutinInputScreen(){
           maxLength={5}
         />
 
-        {/* 날짜 입력 */}
-        <Button title="날짜" onPress={ShowDateModal}> </Button>
-        {enterShowModal ? (<InputDateModal style={styles.dateModal}/>):('')}
       </View>
 
       <View style={styles.buttonsContainer}>

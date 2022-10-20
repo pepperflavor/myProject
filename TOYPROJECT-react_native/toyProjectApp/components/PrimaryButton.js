@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     paddingVertical: 8,
+    fontSize: 20,
+
   },
   pressed: {
     opacity: 0.75,
