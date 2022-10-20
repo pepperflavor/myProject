@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
+import CalendarModal from './screens/CalendarModal';
 import RoutinInputScreen from './screens/RoutinInputScreen';
 
 export default function App() {
@@ -10,7 +11,7 @@ export default function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   let mainScreen = <RoutinInputScreen />;
-
+  let calendarScreen = <CalendarModal/>
 
   return (
     <LinearGradient colors={["#3b021f", "#ddb52f"]} style={styles.rootScreen}>
@@ -20,7 +21,7 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-        {mainScreen}
+        {calendarScreen}
       </ImageBackground>
     </LinearGradient>
   );
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
   },
 
   backgroundImage: {
+    marginTop: '30%',
     opacity: 0.15,
   },
 });

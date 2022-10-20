@@ -63,18 +63,22 @@ export default InputDateModal;
 
   const styles = StyleSheet.create({
     center: {
-      position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: -1,
-        flexDirection: 'row',
-        flex : 1,
-      },
-      separator: {
-        width: 3,
-      },
+      position: "absolute",
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: -1,
+      flexDirection: "row",
+      flex: 1,
+    },
+    separator: {
+      width: 3,
+    },
+    buttons: {
+      justifyContent: "center",
+      alignItems: "center",
+    },
   });
