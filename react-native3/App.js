@@ -10,11 +10,12 @@ import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 
 const Stack = createNativeStackNavigator();
 
+// StatusBar navigation screen에 등록한 name 띄워줌
 // navigator 관련된 태그가 아닌게 들어있어도 터짐^^
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="MealsCategories" component={CategoriesScreen} />

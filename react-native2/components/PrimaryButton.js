@@ -13,7 +13,6 @@ function PrimaryButton({ children, onPress }) {
           }}
           onPress={onPress}
           android_ripple={{ color: "#640233" }}
-        
         >
           <Text style={styles.buttonText}>{children}</Text>
         </Pressable>

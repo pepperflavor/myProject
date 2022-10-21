@@ -1,29 +1,50 @@
 import { useState } from 'react';
 import { StyleSheet, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 
 import CalendarModal from './screens/CalendarModal';
 import RoutinInputScreen from './screens/RoutinInputScreen';
+import LoginScreen from './screens/LoginScreen';
+import SnsOverviewScreen from './screens/SnsOverviewScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-
   //로그인 관련
   const [isLogin, setIsLogin] = useState(false);
 
   let mainScreen = <RoutinInputScreen />;
   let calendarScreen = <CalendarModal/>
+  let loginScreen = <LoginScreen/>
 
   return (
-    <LinearGradient colors={["#3b021f", "#ddb52f"]} style={styles.rootScreen}>
-      <ImageBackground
-        source={require("./assets/images/background.png")}
-        resizeMode="cover"
-        style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
-      >
-        {calendarScreen}
-      </ImageBackground>
-    </LinearGradient>
+    <>
+      <LinearGradient colors={["#3b021f", "#ddb52f"]} style={styles.rootScreen}>
+        <ImageBackground
+          source={require("./assets/images/background.png")}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={styles.backgroundImage}
+        >
+          {/* 로그인 검증구현후 {isLogin ? loginScreen : calendarScreen} */}
+          {calendarScreen}
+        </ImageBackground>
+      </LinearGradient>
+
+
+      {/* navigation 등록  */}
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="SnsScreen" component={SnsOverviewScreen} />
+          <Stack.Screen name="CalendarScreen" component={CalendarModal} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
 

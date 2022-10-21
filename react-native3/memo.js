@@ -9,6 +9,8 @@
 */ 
 
 /*              react-Navigation
+
+
     react-native 에서 사용할 때 통합하기 아~~`주 용이하다. 컴포넌트 기반의 라이브러리임
 
     설치명령어
@@ -66,6 +68,42 @@
             const navigation = useNavigation();
             이 훅을 사용해 navigation 객체를 받아서 쓸 수 있다.
         
+*/
+
+/*
+        navigation 으로 페이지 이동 및 정보 전달
+
+        ex)
+        <Stack.Screen name="MealsCategories" component={CategoriesScreen} />
+        이런식으로 navigation에 등록해둔 페이지이름을 써줘야한다.
+
+        - 첫번째 인수 이동할 페이지 이름
+        - 두번째 인수는 넘겨줄 매개변수의 값(객체), 식별자 이름은 마음대로, 값은 잘 갖다써ㅏ야함
+        navigation.navigate("MealsOverview", {
+            categoryId : this.id,
+        });
+
+        Screen으로 등록되어있는 컴포넌트는 파라미터로 {route}를 받을 수 있다
+
+
+        ** 돌아가기 버튼
+        - goBack() :  네비게이터의 이전 화면으로 돌아간다
         
+        예시)
+        function ProfileScreen({ navigation: { goBack } }) {
+            return (
+                <View>
+                <Button onPress={() => goBack()} title="Go back from ProfileScreen" />
+                </View>
+            );
+        }
+*/
+
+/*  screen에 등록되지 않은 페이지에서 해당 객체에 접근하고 싶을때
+        import { useRoute } from "@react-navigation/native"; 를 사용한다
+
+        const route = useRoute();
+
+        route.params.받아올객체키이름
 
 */
