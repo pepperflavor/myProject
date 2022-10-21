@@ -15,7 +15,7 @@ function RoutinInputScreen(props){
     const [enteredSets, setEnteredSets] = useState(" "); // 셋트개수
     const [enteredDate , setEnteredDate] = useState(''); // 입력할 날짜
 
-    
+
     function routineInputHandler(enteredText) {
       setEnteredRoutine(enteredText);
     }
@@ -32,7 +32,7 @@ function RoutinInputScreen(props){
       // 넘겨준 날짜값 받아오기
       // setEnteredDate(props.inputDate);
     }
-  //=============== 입력창 내용들 관련
+  //=============== 입력창 내용들 관련 끝
 
 
 
@@ -53,7 +53,7 @@ function RoutinInputScreen(props){
         function confirmInputHandler() {
           const chosenNumber = parseInt(enteredNumber); //숫자를 문자열로 변환시켜줌
           console.log(chosenNumber);
-          if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+          if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 999) {
             Alert.alert(
               "유효하지 않은 입력입니다.",
               "1 ~ 99사이의 숫자를 입력하십시오",
@@ -72,40 +72,60 @@ function RoutinInputScreen(props){
         }
 
   return (
-    <View style={styles.inputContainer}>
+    <View style={styles.routineContainer}>
       <View>
-        <TextInput
-          style={styles.numberInput}
-          placeholder="운동명"
-          autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
-          autoCorrect={false}
-          onChangeText={routineInputHandler}
-          value={enteredRoutine}
-          maxLength={5}
-        />
-        <TextInput
-          style={styles.numberInput}
-          placeholder="Amount"
-          keyboardType="number-pad" // 입력키 제한시키기
-          autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
-          autoCorrect={false}
-          onChangeText={numberInputHandler}
-          value={enteredNumber}
-          maxLength={5}
-        />
+        <View>
+          <Text style={styles.inputTitle}>운동명 : </Text>
+          <TextInput
+            style={styles.numberInput}
+            autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
+            autoCorrect={false}
+            onChangeText={routineInputHandler}
+            value={enteredRoutine}
+          />
+        </View>
+
+        <View>
+          <Text style={styles.inputTitle}>무게 : </Text>
+          <TextInput
+            style={styles.numberInput}
+            keyboardType="number-pad" // 입력키 제한시키기
+            autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
+            autoCorrect={false}
+            onChangeText={numberInputHandler}
+            value={enteredNumber}
+            maxLength={3}
+          />
+          <Text style={styles.inputTitle}>Kg</Text>
+        </View>
+
+        <View>
+          <Text style={styles.inputTitle}>SETS : </Text>
+          <TextInput
+            style={styles.numberInput}
+            keyboardType="number-pad" // 입력키 제한시키기
+            autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
+            autoCorrect={false}
+            onChangeText={setsInputhandler}
+            value={enteredSets}
+            maxLength={2}
+          />
+          <Text style={styles.inputTitle}>Set</Text>
+        </View>
+
         {/* 운동 부위 drop바 하고싶다 option */}
         <TextInput
           style={styles.numberInput}
           placeholder="부위"
-          keyboardType="number-pad" // 입력키 제한시키기
           autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
           autoCorrect={false}
           onChangeText={numberInputHandler}
           value={enteredNumber}
           maxLength={5}
         />
-
       </View>
+
+      {/* 날짜 */}
 
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
@@ -122,7 +142,7 @@ function RoutinInputScreen(props){
 export default RoutinInputScreen;
 
 const styles = StyleSheet.create({
-  inputContainer: {
+  routineContainer: {
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
@@ -149,6 +169,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  inputTitle: {
+    fontWeight: "bold",
+    fontSize: 12,
+    color: 'beige',
+  },
   userInputContainer: {},
 
   buttonsContainer: {
@@ -157,8 +182,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
   },
-  dateModal : {
-    flex:1,
-  }
+  dateModal: {
+    flex: 1,
+  },
 });
 
