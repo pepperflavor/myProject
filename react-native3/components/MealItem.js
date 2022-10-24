@@ -1,9 +1,8 @@
 import { Pressable, View, Image, Text, StyleSheet } from "react-native";
 
-function MealItem({ title, imageUrl }) {
+function MealItem({ title, imageUrl, duration, complexity, affordability }) {
   // 터치하면 장바구니에 담겠냐는 알람창 띄우기
 
-  
   return (
     <View>
       <Pressable>
@@ -14,9 +13,9 @@ function MealItem({ title, imageUrl }) {
         </View>
 
         <View>
-          <Text></Text>
-          <Text></Text>
-          <Text></Text>
+          <Text>{duration}min</Text>
+          <Text>{complexity}</Text>
+          <Text>{affordability}</Text>
         </View>
       </Pressable>
     </View>
