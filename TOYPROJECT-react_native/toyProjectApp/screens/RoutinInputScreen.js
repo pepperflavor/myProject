@@ -1,10 +1,12 @@
 import { useState } from "react";
-import {  TextInput, View, StyleSheet, Alert, Button } from "react-native";
-import PrimaryButton from "../components/PrimaryButton";
-import InputDateModal from "./InputDateModal";
+import {  TextInput, View, StyleSheet, Alert, Button, Pressable } from "react-native";
 import { Modal } from "react-native";
+
+import InputDateModal from "./InputDateModal";
 import CalendarModal from "./CalendarModal";
 
+import PrimaryButton from "../components/PrimaryButton";
+import LoginButton from "../ui/LoginButton";
 
 function RoutinInputScreen(props){
 
@@ -22,6 +24,7 @@ function RoutinInputScreen(props){
 
     function numberInputHandler(enteredText) {
       setEnteredNumber(enteredText);
+
     }
 
  
@@ -41,6 +44,10 @@ function RoutinInputScreen(props){
 
     function ShowDateModal(){
       setEnterShowModal(true)
+    }
+
+    function closeModal(){
+      setEnterShowModal(false);
     }
 //=============== 날짜 선택 달력 관련=========
 
@@ -123,10 +130,23 @@ function RoutinInputScreen(props){
           value={enteredNumber}
           maxLength={5}
         />
+        <Pressable onPress={ShowDateModal}>
+          <LoginButton>날짜 선택</LoginButton>
+        </Pressable>
+        {/* 달력모달창 */}
+        {enterShowModal ? (
+          <CalendarModal
+            enterShowModal={enterShowModal}
+            setEnterShowModal={setEnterShowModal}
+            closeModal={closeModal}
+            setEnteredDate={setEnteredDate}
+          />
+        ) : (
+          <Text style={styles.numberInput}>{enteredDate}</Text>
+        )}
       </View>
 
       {/* 날짜 */}
-
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={setEnteredNumber}>입력</PrimaryButton>

@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
 import { format } from "date-fns";
 import { Calendar } from "react-native-calendars";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
-import Navibar from "./Navibar";
 
-function CalendarModal() {
+function CalendarModal(props) {
   const posts = [
     {
       id: 1,
@@ -41,14 +40,19 @@ function CalendarModal() {
     },
   };
 
+  function closeModal(){
+   setEnterShowModal(false)
+  }
+
   function onPressHandler() {
+    props.setEnteredDate(selectedDate);
     // 창닫고 정보 넘겨주기
     console.log("close modal");
+    props.closeModal;
   }
 
   return (
     <>
-      <Navibar />
       <View style={styles.calendarContainer}>
         <Calendar
           style={styles.calendar}
@@ -65,10 +69,14 @@ function CalendarModal() {
         />
         <View style={styles.buttonContainer}>
           <View style={styles.buttons}>
-            <PrimaryButton onPress={onPressHandler}>입력하기</PrimaryButton>
+            <Pressable onPress={onPressHandler}>
+              <PrimaryButton>날짜입력</PrimaryButton>
+            </Pressable>
           </View>
           <View style={styles.buttons}>
-            <PrimaryButton>취소</PrimaryButton>
+            <Pressable onPress={closeModal}>
+              <PrimaryButton>취소</PrimaryButton>
+            </Pressable>
           </View>
         </View>
       </View>
@@ -78,6 +86,7 @@ function CalendarModal() {
 
 const styles = StyleSheet.create({
   calendarContainer: {
+
   },
   calendar: {
     borderBottomWidth: 1,
