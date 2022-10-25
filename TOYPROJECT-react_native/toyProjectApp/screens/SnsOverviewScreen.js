@@ -1,28 +1,28 @@
-import { FlatList, View } from "react-native";
-import SnsItem from "../components/SnsItem";
-import { useRoute } from "@react-navigation/native";
+// import { FlatList, View } from "react-native";
+// import SnsItem from "../components/SnsItem";
+// import { useRoute } from "@react-navigation/native";
 
-import {SNSROUTINE} from '../data/dummy-data'
+// import {SNSROUTINE} from '../data/dummy-data'
 
-function SnsOverviewScreen(){
+// function SnsOverviewScreen(){
 
-    const route = useRoute();
-    const routineId = route.params.title;
+//     const route = useRoute();
+//     // const routineId = route.params.title;
 
-    const displayRoutine = SNSROUTINE.filter((routineItem) => {
-        return routineItem.titles.indexOf(routineId) >= 0;
-    })
+//     // const displayRoutine = SNSROUTINE.filter((routineItem) => {
+//     //     return routineItem.titles.indexOf(routineId) >= 0;
+//     // })
 
-    function renderRoutinItem(itemData){
-        return(
-            <SnsItem/>
-        )
-    }
+//     function renderRoutinItem(itemData){
+//         return(
+//             <SnsItem/>
+//         )
+//     }
 
-    return(
-        <View>
-            <FlatList/>
-        </View>
-    )
-}
-export default SnsOverviewScreen;
+//     return(
+//         <View>
+//             <FlatList/>
+//         </View>
+//     )
+// }
+// export default SnsOverviewScreen;

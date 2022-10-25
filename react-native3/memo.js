@@ -9,8 +9,6 @@
 */ 
 
 /*              react-Navigation
-
-
     react-native 에서 사용할 때 통합하기 아~~`주 용이하다. 컴포넌트 기반의 라이브러리임
 
     설치명령어

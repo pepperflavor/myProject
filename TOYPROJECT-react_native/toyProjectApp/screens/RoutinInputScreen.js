@@ -1,33 +1,37 @@
 import { useState } from "react";
 import {  TextInput, View, StyleSheet, Alert, Button, Pressable } from "react-native";
 import { Modal } from "react-native";
-
-import InputDateModal from "./InputDateModal";
 import CalendarModal from "./CalendarModal";
+import { Dropdown } from "react-native-material-dropdown";
 
-import PrimaryButton from "../components/PrimaryButton";
+
+import PrimaryButton from "./../ui/PrimaryButton";
 import LoginButton from "../ui/LoginButton";
+import BodyDropbar from "../components/BodyDropbar";
+
 
 function RoutinInputScreen(props){
 
-
   //=============== 입력창 내용들 관련 ====================
-  const [enteredRoutine, setEnteredRoutine] = useState(''); // 운동명
-    const [enteredNumber, setEnteredNumber] = useState(" "); // 갯수
+    const [enteredRoutine, setEnteredRoutine] = useState(''); // 운동명
+    const [enteredBody, setEnteredBody] = useState('') // 운동부위
+    const [enteredAmount, setEnteredAmount] = useState(" "); // 갯수
     const [enteredSets, setEnteredSets] = useState(" "); // 셋트개수
     const [enteredDate , setEnteredDate] = useState(''); // 입력할 날짜
 
 
-    function routineInputHandler(enteredText) {
+    function routineInputHandler() {
       setEnteredRoutine(enteredText);
     }
 
-    function numberInputHandler(enteredText) {
-      setEnteredNumber(enteredText);
-
+    function inputBodyHandler(){
+      setEnteredBody(userinput)
     }
 
- 
+    function numberInputHandler() {
+      setEnteredAmount(enteredText);
+    }
+
     function setsInputhandler(){
 
     }
@@ -36,6 +40,18 @@ function RoutinInputScreen(props){
       // setEnteredDate(props.inputDate);
     }
   //=============== 입력창 내용들 관련 끝
+
+  //=============== 부위 입력 드롭바 옵션
+
+    let data = [
+      {
+        value: "UPPER BODY",
+      },
+      {
+        value: "LOWER BODY",
+      },
+    ];
+
 
 
 
@@ -100,7 +116,7 @@ function RoutinInputScreen(props){
             autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
             autoCorrect={false}
             onChangeText={numberInputHandler}
-            value={enteredNumber}
+            value={enteredAmount}
             maxLength={3}
           />
           <Text style={styles.inputTitle}>Kg</Text>
@@ -121,6 +137,7 @@ function RoutinInputScreen(props){
         </View>
 
         {/* 운동 부위 drop바 하고싶다 option */}
+        <Dropdown label="BODY" data={data} onChangeText={(e)=>{ enteredBody = e.target.value;}} />
         <TextInput
           style={styles.numberInput}
           placeholder="부위"

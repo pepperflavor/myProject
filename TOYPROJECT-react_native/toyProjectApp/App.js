@@ -14,6 +14,21 @@ import SnsOverviewScreen from './screens/SnsOverviewScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+    let webviewRef = useRef();
+
+    const handlSetRef = (_ref) => {
+      webviewRef = _ref;
+    };
+
+    const handleEndLoading = (e) => {
+      console.log("handleEndLoading");
+      webviewRef.postMessage("로딩 완료시 webview로 정보를 보내는 곳");
+    };
+
+
+
+
   //로그인 관련
   const [isLogin, setIsLogin] = useState(false);
 
@@ -31,19 +46,14 @@ export default function App() {
           imageStyle={styles.backgroundImage}
         >
           {/* 로그인 검증구현후 {isLogin ? loginScreen : calendarScreen} */}
-          {calendarScreen}
+          {loginScreen}
+          <WebviewContainer
+            webviewRef={webviewRef}
+            handleSetRef={handleSetRef}
+            handleEndLoading={handleEndLoading}
+          />
         </ImageBackground>
       </LinearGradient>
-
-
-      {/* navigation 등록  */}
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="SnsScreen" component={SnsOverviewScreen} />
-          <Stack.Screen name="CalendarScreen" component={CalendarModal} />
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
     </>
   );
 }
@@ -68,3 +78,15 @@ const styles = StyleSheet.create({
     opacity: 0.15,
   },
 });
+
+
+      {
+        /* navigation 등록  */
+      }
+      // <NavigationContainer>
+      //   <Stack.Navigator>
+      //     {/* <Stack.Screen name="SnsScreen" component={SnsOverviewScreen} /> */}
+      //     <Stack.Screen name="CalendarScreen" component={CalendarModal} />
+      //     <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      //   </Stack.Navigator>
+      // </NavigationContainer>;
