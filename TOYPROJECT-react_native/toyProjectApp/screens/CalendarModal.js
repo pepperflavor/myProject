@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { format } from "date-fns";
 import { Calendar } from "react-native-calendars";
 import { Pressable, StyleSheet, View } from "react-native";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from './../ui/PrimaryButton';
 
 function CalendarModal(props) {
   const posts = [
