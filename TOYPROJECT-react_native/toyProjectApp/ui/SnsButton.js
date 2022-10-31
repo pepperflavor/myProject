@@ -1,10 +1,25 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from '@react-navigation/native';
 
 // 여기서 navigatioin으로  페이지 이동시켜줘야하나?
-function SnsButton(props) {
+function SnsButton({onPress, title}) {
+  const navigation = useNavigation();
+
+  function routinePressHandler(){
+      navigation.navigate('RoutineInput');
+  }
+
+
   return (
     <View style={styles.container}>
+      <Pressable
+        android_ripple={{ color: "#dddddd" }}
+        onPress={routinePressHandler}
+        style={({ pressed }) => {
+          pressed && styles.pressedItem;
+        }}
+      >
       <LinearGradient
         colors={[
           "#f54242",
@@ -16,16 +31,9 @@ function SnsButton(props) {
         ]}
         style={styles.container}
       >
-        <Pressable
-          android_ripple={{ color: "#dddddd" }}
-          onPress={({ pressed }) => (pressed ? "" : "")}
-          style={({ pressed }) => {
-            pressed && styles.pressedItem;
-          }}
-        >
-          <Text style={styles.loginButton}>Share Routine!</Text>
-        </Pressable>
+          <Text style={styles.loginButton}>{title}</Text>
       </LinearGradient>
+        </Pressable>
     </View>
   );
 }
@@ -37,11 +45,14 @@ const styles = StyleSheet.create({
     margin: 8,
     borderRadius: 6,
     color: "white",
+    height : 35,
+    marginBottom : 25,
     // backgroundColor: "#210644", // 로그인 버튼 색
   },
   loginButton: {
     color: "white",
     padding: 8,
+    textAlign: 'center'
   },
   pressedItem: {
     opacity: 0.5,

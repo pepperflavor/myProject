@@ -37,22 +37,81 @@ export default CalendarView;
 */
 
 /*
-    드롭바 라이브러리1
+    드롭바 라이브러리
 
     설치명령어
     ==============================================================================
         $ npm install react-native-dropdown-select-list
     ==============================================================================
+*/
+
+/*  드로우어 네비게이터설치 
+=========================================================
+  npm install @react-navigation/drawer
+=========================================================
+
+// Navigation 설치
+npm install @react-navigation/native
+
+// 의존성 설치
+npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+npx pod-install
+
+*/
+
+/*
+  ,
+    "packagerOpts": {
+      "sourceExts": [ "js", "json", "ts", "tsx", "jsx", "vue"],
+      "config" : "metro.config.js"
+    }
+*/
 
 
-    ==============================================================================
-      npm install @react-navigation/native-stack
-    ==============================================================================
-
-    ==============================================================================
-      npm install @react-navigation/native
-    ==============================================================================
-
+/*
+    firebase에 연결하기
     
-    드롭바 라이브러리1
+    코드 doc에보면 로그인, 회원가입, 등등 여러 옵션 api있음
+    // https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API_KEY] 이 주소로 요청을 전송하는데
+    여기에서 API_KEY는 자신걸 넣어줘야한다. 이 키는 프로젝트->플젝설정에 가면 web API에 잇다
+*/
+
+
+/*
+  정리하자면 느낌표 두개(!!) 연산자는 확실한 논리결과를 가지기 위해 사용합니다.
+  예를 들어 정의되지 않은 변수 undefined 값을 가진 내용의 논리 연산 시에도 확실한 true / false를 가지도록 하는게 목적입니다.
+*/
+/*
+    
+  var a;
+  console.log("a    :: " + (a));
+  console.log("!a   :: " + (!a));
+  console.log("!!a  :: " + (!!a));
+  
+  var b = true;
+  console.log("b    :: " + (b));
+  console.log("!b   :: " + (!b));
+  console.log("!!b  :: " + (!!b));
+
+  var c = null;
+  console.log("c    :: " + (c));
+  console.log("!c   :: " + (!c));
+  console.log("!!c  :: " + (!!c));
+
+====================================================
+
+결과
+
+a    :: undefined
+!a   :: true
+!!a  :: false
+
+b    :: true
+!b   :: false
+!!b  :: true
+
+c    :: null
+!c   :: true
+!!c  :: false
 */

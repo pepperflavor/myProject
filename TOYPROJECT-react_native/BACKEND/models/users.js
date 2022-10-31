@@ -22,7 +22,7 @@ class User extends sql.Model {
           autoIncrement: true,
         },
         nick_name: {
-          type: Sequelize.STRING(50),
+          type: Sequelize.TEXT,
         },
         password: {
           type: Sequelize.STRING(255),

@@ -1,178 +1,196 @@
-import { useState } from "react";
-import {  TextInput, View, StyleSheet, Alert, Button, Pressable } from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import {  TextInput, View, StyleSheet, Alert, Button, Text, ImageBackground } from "react-native";
 import { Modal } from "react-native";
-import CalendarModal from "./CalendarModal";
-import { Dropdown } from "react-native-material-dropdown";
 
 
-import PrimaryButton from "./../ui/PrimaryButton";
-import LoginButton from "../ui/LoginButton";
-import BodyDropbar from "../components/BodyDropbar";
+import PrimaryButton from "../ui/PrimaryButton";
+import CalenderIconButton from "../ui/CalenderIconButton";
+import { useFocusEffect } from "@react-navigation/native";
 
 
-function RoutinInputScreen(props){
+function RoutinInputScreen({navigation, route }){
+  //navigation 으로 넘겨받은 객체 쓰기
+  const getInputDate = route.params?.date; // 받은 값이 있는지 확인 후 있으면 inputDate을 꺼내줌
+  console.log("넘겨받은 날짜" + getInputDate);
+  const isGetDate = !!getInputDate; // getInputDate 값이 있 : true 없는지 boolean으로 반환
+  console.log("dddddddd" + route.params);
+  for (const key in route) {
+    console.log("key", route.params);
+  }
+
+  useEffect(() => {
+    console.log("업데이트 될때 실행");
+     if (isGetDate) {
+       setEnteredDate(getInputDate);
+     }
+  }, [getInputDate]);
 
   //=============== 입력창 내용들 관련 ====================
-    const [enteredRoutine, setEnteredRoutine] = useState(''); // 운동명
-    const [enteredBody, setEnteredBody] = useState('') // 운동부위
-    const [enteredAmount, setEnteredAmount] = useState(" "); // 갯수
-    const [enteredSets, setEnteredSets] = useState(" "); // 셋트개수
-    const [enteredDate , setEnteredDate] = useState(''); // 입력할 날짜
+  const [enteredRoutine, setEnteredRoutine] = useState(""); // 운동명
+  const [enteredAmount, setEnteredAmount] = useState(""); // 무게
+  const [enteredSets, setEnteredSets] = useState(""); // 셋트개수
+  const [enteredBody, setEnteredBody] = useState("");
+  const [enteredDate, setEnteredDate] = useState(""); // 입력할 날짜
 
+  function routineInputHandler(inputtitle) {
+    setEnteredRoutine(inputtitle);
+  }
 
-    function routineInputHandler() {
-      setEnteredRoutine(enteredText);
-    }
+  function amountInputHandler(inputAmount) {
+    setEnteredAmount(inputAmount);
+  }
 
-    function inputBodyHandler(){
-      setEnteredBody(userinput)
-    }
+  function setsInputhandler(inputSets) {
+    setEnteredSets(inputSets);
+  }
 
-    function numberInputHandler() {
-      setEnteredAmount(enteredText);
-    }
-
-    function setsInputhandler(){
-
-    }
-    function dateInputHandler(){
-      // 넘겨준 날짜값 받아오기
-      // setEnteredDate(props.inputDate);
-    }
+ 
   //=============== 입력창 내용들 관련 끝
 
-  //=============== 부위 입력 드롭바 옵션
+  //=============== 날짜 선택 달력 관련=========
 
-    let data = [
-      {
-        value: "UPPER BODY",
-      },
-      {
-        value: "LOWER BODY",
-      },
-    ];
+  //=============== 날짜 선택 달력 관련=========
 
+  function resetInputHandler() {
+    setEnteredRoutine(" ");
+    setEnteredAmount(" ");
+    setEnteredSets(" ");
+    setEnteredBody(" ");
+    setEnteredDate(" ");
+  }
 
+  function submitHandler() {}
 
-
-//=============== 날짜 선택 달력 관련=========
-    const [enterShowModal, setEnterShowModal] = useState(false)
-
-    function ShowDateModal(){
-      setEnterShowModal(true)
+  // Alert 설정
+  function confirmInputHandler() {
+    const chosenNumber = parseInt(enteredNumber); //숫자를 문자열로 변환시켜줌
+    console.log(chosenNumber);
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 999) {
+      Alert.alert(
+        "유효하지 않은 입력입니다.",
+        "1 ~ 99사이의 숫자를 입력하십시오",
+        [
+          {
+            text: "확인",
+            style: "destructive",
+            onPress: resetInputHandler,
+          },
+        ]
+      );
+      return;
     }
 
-    function closeModal(){
-      setEnterShowModal(false);
-    }
-//=============== 날짜 선택 달력 관련=========
+    props.onPickNumber(chosenNumber);
+  }
 
+  function headerButtonPressHandler() {
+    console.log("PRESSED!!!");
+  }
 
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerRight : ()=>{
+  //       // 아이콘 설정
+  //       return <CalenderIconButton icon="calendar-outline" color='white' onPress={headerButtonPressHandler}></CalenderIconButton>
+  //     },
+  //   });
+  // }, [navigation, headerButtonPressHandler])
 
-    function resetInputHandler() {
-      setEnteredNumber(" ");
-    }
-
-        function confirmInputHandler() {
-          const chosenNumber = parseInt(enteredNumber); //숫자를 문자열로 변환시켜줌
-          console.log(chosenNumber);
-          if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 999) {
-            Alert.alert(
-              "유효하지 않은 입력입니다.",
-              "1 ~ 99사이의 숫자를 입력하십시오",
-              [
-                {
-                  text: "확인",
-                  style: "destructive",
-                  onPress: resetInputHandler,
-                },
-              ]
-            );
-            return;
-          }
-
-          props.onPickNumber(chosenNumber);
-        }
+  // useFocusEffect(
+  //   useCallback(()=>{
+  //     console.log('이 화면 보는중');
+  //     console.log("날짜 "+ enteredDate);
+  //     return ()=>{
+  //       console.log('달력 모달 보는중');
+  //     };
+  //   },[]),
 
   return (
-    <View style={styles.routineContainer}>
-      <View>
-        <View>
-          <Text style={styles.inputTitle}>운동명 : </Text>
-          <TextInput
-            style={styles.numberInput}
-            autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
-            autoCorrect={false}
-            onChangeText={routineInputHandler}
-            value={enteredRoutine}
-          />
-        </View>
+    <>
+      <ImageBackground
+        source={{
+          uri: "https://cdn.pixabay.com/photo/2017/06/30/21/02/muscle-2459720_960_720.jpg",
+        }}
+        resizeMode="cover"
+        imageStyle={styles.backgroundImage}
+        style={styles.rootScreen}
+      >
+        <View style={styles.routineContainer}>
+          <View>
+            <View>
+              <Text style={styles.inputTitle}>운동명 : </Text>
+              <TextInput
+                style={styles.numberInput}
+                autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
+                autoCorrect={false}
+                onChangeText={(inputtitle) => routineInputHandler(inputtitle)}
+                value={enteredRoutine}
+              />
+            </View>
 
-        <View>
-          <Text style={styles.inputTitle}>무게 : </Text>
-          <TextInput
-            style={styles.numberInput}
-            keyboardType="number-pad" // 입력키 제한시키기
-            autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
-            autoCorrect={false}
-            onChangeText={numberInputHandler}
-            value={enteredAmount}
-            maxLength={3}
-          />
-          <Text style={styles.inputTitle}>Kg</Text>
-        </View>
+            <View>
+              <Text style={styles.inputTitle}>무게(Kg): </Text>
+              <TextInput
+                style={styles.numberInput}
+                keyboardType="number-pad" // 입력키 제한시키기
+                autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
+                autoCorrect={false}
+                onChangeText={(enteredText) => amountInputHandler(enteredText)}
+                value={enteredAmount}
+                maxLength={3}
+              />
+            </View>
 
-        <View>
-          <Text style={styles.inputTitle}>SETS : </Text>
-          <TextInput
-            style={styles.numberInput}
-            keyboardType="number-pad" // 입력키 제한시키기
-            autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
-            autoCorrect={false}
-            onChangeText={setsInputhandler}
-            value={enteredSets}
-            maxLength={2}
-          />
-          <Text style={styles.inputTitle}>Set</Text>
-        </View>
+            <View>
+              <Text style={styles.inputTitle}>SETS : </Text>
+              <TextInput
+                style={styles.numberInput}
+                keyboardType="number-pad" // 입력키 제한시키기
+                autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
+                autoCorrect={false}
+                onChangeText={(inputSets) => setsInputhandler(inputSets)}
+                value={enteredSets}
+                maxLength={3}
+              />
+            </View>
 
-        {/* 운동 부위 drop바 하고싶다 option */}
-        <Dropdown label="BODY" data={data} onChangeText={(e)=>{ enteredBody = e.target.value;}} />
-        <TextInput
+            {/* 운동 부위 drop바 하고싶다 option */}
+            {/* <TextInput
           style={styles.numberInput}
           placeholder="부위"
           autoCapitalize="none" // 첫글자 자동으로 대문자가 되는것 방지해줌
           autoCorrect={false}
-          onChangeText={numberInputHandler}
-          value={enteredNumber}
+          onChangeText={(enteredText) => routineInputHandler(enteredText)}
+          value={enteredBody}
           maxLength={5}
-        />
-        <Pressable onPress={ShowDateModal}>
-          <LoginButton>날짜 선택</LoginButton>
-        </Pressable>
-        {/* 달력모달창 */}
-        {enterShowModal ? (
-          <CalendarModal
-            enterShowModal={enterShowModal}
-            setEnterShowModal={setEnterShowModal}
-            closeModal={closeModal}
-            setEnteredDate={setEnteredDate}
-          />
-        ) : (
-          <Text style={styles.numberInput}>{enteredDate}</Text>
-        )}
-      </View>
+        /> */}
+          </View>
 
-      {/* 날짜 */}
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={setEnteredNumber}>입력</PrimaryButton>
+          <Text style={styles.inputDate}>{enteredDate}</Text>
+
+          {/* 날짜 */}
+          <CalenderIconButton
+            setEnteredDate={setEnteredDate}
+            icon="calendar"
+            color="white"
+            onPress={() => {
+              navigation.navigate("Calendar"), [enteredDate, navigation];
+            }}
+          />
+          <View style={styles.buttonsContainer}>
+            <View style={styles.buttonContainer}></View>
+            <PrimaryButton onPress={() => navigation.navigate("MyPage")}>
+              입력하기
+            </PrimaryButton>
+            <View style={styles.buttonContainer}></View>
+            <PrimaryButton onPress={() => navigation.navigate("MyPage")}>
+              취소
+            </PrimaryButton>
+            <View style={styles.buttonContainer}></View>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={confirmInputHandler}>취소</PrimaryButton>
-        </View>
-      </View>
-    </View>
+      </ImageBackground>
+    </>
   );
 }
 
@@ -196,20 +214,20 @@ const styles = StyleSheet.create({
   },
 
   numberInput: {
-    width: 120,
-    height: 50,
+    width: 200,
+    height: 40,
     fontSize: 32,
     borderBottomColor: "#ddb52f",
     borderBottomWidth: 2,
     color: "#ddb52f",
-    marginVertical: 10,
+    marginVertical: 5,
     fontWeight: "bold",
     textAlign: "center",
   },
   inputTitle: {
     fontWeight: "bold",
     fontSize: 12,
-    color: 'beige',
+    color: "beige",
   },
   userInputContainer: {},
 
@@ -221,6 +239,24 @@ const styles = StyleSheet.create({
   },
   dateModal: {
     flex: 1,
+  },
+  inputDate: {
+    width: 200,
+    height: 40,
+    fontSize: 32,
+    borderBottomColor: "#ddb52f",
+    borderBottomWidth: 2,
+    color: "#ddb52f",
+    marginVertical: 5,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  rootScreen: {
+    width: "100%",
+    height: "100%",
+  },
+  backgroundImage: {
+    opacity: 0.75,
   },
 });
 
