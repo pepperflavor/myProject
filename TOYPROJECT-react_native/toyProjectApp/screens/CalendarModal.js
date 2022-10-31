@@ -1,10 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Calendar } from "react-native-calendars";
-import { Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+
+import Navibar from "./Navibar";
 import PrimaryButton from './../ui/PrimaryButton';
 
-function CalendarModal(props) {
+function CalendarModal({ navigation }) {
   const posts = [
     {
       id: 1,
@@ -21,17 +23,15 @@ function CalendarModal(props) {
   ];
 
   const markedDates = posts.reduce((acc, current) => {
+    // 날짜 정보 형식 정해주기
     const formattedDate = format(new Date(current.date), "yyyy-MM-dd");
     acc[formattedDate] = { marked: true };
     return acc;
   }, {});
 
-  const [selectedDate, setSelectedDate] = useState(
-    format(new Date(), "yyyy-MM-dd")
-  );
+  const [selectedDate, setSelectedDate] = useState(" ");
 
   // 날짜 정보 "yyyy-MM-dd" 형태로 정의된 selectedDate 값 넘겨주기
-
   const markedSelectedDates = {
     ...markedDates,
     [selectedDate]: {
@@ -40,16 +40,21 @@ function CalendarModal(props) {
     },
   };
 
-  function closeModal(){
-   setEnterShowModal(false)
+  console.log("@@@@ Calendar" + selectedDate);
+  console.log(typeof selectedDate);
+
+  function cancelHandler() {
+    navigation.goBack();
   }
 
-  function onPressHandler() {
-    props.setEnteredDate(selectedDate);
-    // 창닫고 정보 넘겨주기
-    console.log("close modal");
-    props.closeModal;
+  function pressOkay() {
+    navigation.goBack();
   }
+
+
+
+ 
+
 
   return (
     <>
@@ -63,20 +68,21 @@ function CalendarModal(props) {
             dotColor: "#009688",
             todayTextColor: "#009688",
           }}
-          onDayPress={(day) => {
-            setSelectedDate(day.dateString);
-          }}
+          onDayPress={(day) => setSelectedDate(day.dateString)}
         />
         <View style={styles.buttonContainer}>
           <View style={styles.buttons}>
-            <Pressable onPress={onPressHandler}>
-              <PrimaryButton>날짜입력</PrimaryButton>
-            </Pressable>
+            <PrimaryButton
+              onPress={() =>
+                navigation.navigate("RoutineInput", { date : selectedDate })
+              }
+            >
+              입력하기
+            </PrimaryButton>
           </View>
           <View style={styles.buttons}>
-            <Pressable onPress={closeModal}>
-              <PrimaryButton>취소</PrimaryButton>
-            </Pressable>
+            {/* 뒤로가기 */}
+            <PrimaryButton onPress={cancelHandler}>취소</PrimaryButton>
           </View>
         </View>
       </View>
@@ -86,7 +92,6 @@ function CalendarModal(props) {
 
 const styles = StyleSheet.create({
   calendarContainer: {
-
   },
   calendar: {
     borderBottomWidth: 1,
