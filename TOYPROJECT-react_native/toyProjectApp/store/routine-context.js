@@ -45,26 +45,30 @@ export const RoutineContext = createContext({
     routine : [],
     addRoutine : ({title, amount, sets ,date}) => {},
     deleteRoutine : (id) => {},
-    updateRoutine : (id,{title, amount, sets ,date} ) =>{},
+    updateRoutine : (id, {title, amount, sets ,date} ) =>{},
 });
-
 
 function routineReducer(state, action){
     switch (action.type) {
         case 'ADD':
+            // 임시 id 부여
             const id = new Date().toString() + Math.random().toString();
-            return [{...action.payload, id: id},...state]
+            return [{...action.payload, id: id}, ...state]
+
         case 'UPDATE':
             const updatebleRoutineIndex = state.findIndex(
-                (routine) => routine.id === action.payload.id)
+                (routine) => routine.id === action.payload.id
+                );
        
+                //updatebleRoutineIndex에 접근
             const updatebleRoutine = state[updatebleRoutineIndex];
-            const updatedItem ={...updatebleRoutine, ...action.payload.data};
+            const updatedItem ={ ...updatebleRoutine, ...action.payload.data};
             const updatedRoutine = [...state];
             updatedRoutine[updatebleRoutineIndex] = updatedItem;
             return updatedRoutine;
+
             case 'DELETE':
-                return state.filter((routine) =>{ routine.id !== action.payload})
+                return state.filter((routine) => routine.id !== action.payload)
         default:
             return state;
     }
@@ -78,6 +82,7 @@ function RoutineContextProvider({childern}){
     const [routineState, dispatch] = useReducer(routineReducer, DUMMY_ROUTINE); // 리듀서와 연결
 
     function addRoutine(routineData){
+        // 받은 routineData를 payload로 보냄
         dispatch({ type: 'ADD', payload : routineData });
     }
 

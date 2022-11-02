@@ -96,14 +96,10 @@ export default function App() {
     const authCtx = useContext(AuthContext);
 
 
-
-    // function routinePressHandler(){
-    //     navigation.navigate('RoutinInputScreen');
-    // }
-
     return(
       <>
       <FavoriteContextProvider>
+    
         <Stack.Navigator
           screenOptions={{
             headerStyle : { backgroundColor : "black"},
@@ -134,6 +130,7 @@ export default function App() {
               <Stack.Screen name="Calendar" component={CalendarModal} options={{ presentation: 'modal'}}/>
               <Stack.Screen name="Favorites" component={MyFavoritesScreen}/>
            </Stack.Navigator>
+
         </FavoriteContextProvider>
 
       </>
@@ -156,9 +153,11 @@ return (
         <>
       <StatusBar style="light"/>
             <AuthContextProvider>
+              <RoutineContextProvider>
                   <FavoriteContextProvider>
                     <Navigation/>
                   </FavoriteContextProvider>
+              </RoutineContextProvider>
             </AuthContextProvider>
         </>
   );
@@ -173,14 +172,11 @@ const styles = StyleSheet.create({
 /*
               <RoutineContextProvider>
               </RoutineContextProvider>
+<FavoriteContextProvider>
+</FavoriteContextProvider>
 */
 
 /*
-              <RoutineContextProvider>
-        </RoutineContextProvider>
-
-      <FavoriteContextProvider>
-      </FavoriteContextProvider>
 */
 
 /*

@@ -1,8 +1,12 @@
 import { ImageBackground, StyleSheet, Text, View } from "react-native"
 import RoutinesOutput from "../components/Routine/RoutinesOutput";
+import { useContext } from 'react';
+import { RoutineContext } from './../store/routine-context';
 
 
 function MyRoutine(){
+
+  const rountineCtx = useContext(RoutineContext);
 
     return (
       <>
@@ -15,7 +19,7 @@ function MyRoutine(){
           style={styles.rootScreen}
         >
           <View>
-            <RoutinesOutput />
+            <RoutinesOutput myroutine={rountineCtx.routine}/>
           </View>
         </ImageBackground>
       </>

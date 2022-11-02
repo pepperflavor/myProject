@@ -48,8 +48,8 @@ const DUMMY_ROUTINE = [
 function RoutinesOutput({ myroutine }){
     return(
         <View style={styles.container}>
-          <RoutineSummary myroutine={DUMMY_ROUTINE}/>
-          <RoutineList myroutine={DUMMY_ROUTINE}/>
+          <RoutineSummary myroutine={myroutine}/>
+          <RoutineList myroutine={myroutine}/>
         </View>
     )
 }
