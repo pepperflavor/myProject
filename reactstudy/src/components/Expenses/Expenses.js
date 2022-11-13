@@ -22,6 +22,7 @@ function Expenses(props) {
     return expense.date.getFullYear().toString() === filteredYear;
   });
 
+
   // 조건부 contents 출력방법
   /* 
     변수에 태그째로 넣어놓고 return 부분에서 조건으로

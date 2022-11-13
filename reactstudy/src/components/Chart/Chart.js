@@ -11,7 +11,7 @@ const Chart = (props) => {
   return (  
     <div className="chart">
       {/* 배열에 담긴 값 map해서 가져오기 */}
-      {props.dataPoint.map((dataPoint)=>(
+      { props.dataPoint.map((dataPoint)=>(
           <ChartBar
               key={dataPoint.label}
               value={dataPoint.value}
