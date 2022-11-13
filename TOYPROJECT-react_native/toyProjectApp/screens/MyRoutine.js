@@ -8,6 +8,10 @@ function MyRoutine(){
 
   const rountineCtx = useContext(RoutineContext);
 
+  const recentRoutine = rountineCtx.routine.filter((routine) =>{
+    const today = new Date();
+  })
+
     return (
       <>
         <ImageBackground
