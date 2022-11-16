@@ -1,36 +1,46 @@
 import React from 'react';
-import './Button.css';
-import styled from 'styled-components'
 
-// styled 객체의 메소드 button, html 요소에 대해 접근할 수 있다.
-const Button = styled.button`
-    font: inherit;
-    padding: 0.5rem 1.5rem;
-    border: 1px solid #8b005d;
-    color: white;
-    background: #8b005d;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
-    cursor: pointer;
+/*
+  원래 css 파일을 import할 때는
+  import './Button.css'; 이렇게 써야 했다.
+*/
+// CSS Module을 사용하려면
+import styles from './Button.module.css';
 
+// import styled from 'styled-components'
 
-  &:focus {
-    outline: none;
-  }
+// // styled 객체의 메소드 button, html 요소에 대해 접근할 수 있다.
+// const Button = styled.button`
+//     font: inherit;
+//     padding: 0.5rem 1.5rem;
+//     border: 1px solid #8b005d;
+//     color: white;
+//     background: #8b005d;
+//     box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
+//     cursor: pointer;
 
-  &:hover,
-  &:active {
-    background: #ac0e77;
-    border-color: #ac0e77;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
-  }
-`;
+//   &:focus {
+//     outline: none;
+//   }
 
-// const Button = props => {
-//   return (
-//     <button type={props.type} className="button" onClick={props.onClick}>
-//       {props.children}
-//     </button>
-//   );
-// };
+//   @media (min-width: 768px){
+//     width : auto;
+//   }
+
+//   &:hover,
+//   &:active {
+//     background: #ac0e77;
+//     border-color: #ac0e77;
+//     box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
+//   }
+// `;
+
+const Button = props => {
+  return (
+    <button type={props.type} className={styles.button} onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
+};
 
 export default Button;
