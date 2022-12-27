@@ -116,8 +116,34 @@
 
             가로로 화면이 변경됐을때 이미지 크기도 변경되어야 한다. GameoverScreen 참조
 
-            
+            useWindowDimensions() 훅을 사용
 
+                        
+            // 가로 화면 조정 설정
+            const {width, height} = useWindowDimensions();
+
+            let imageSize = 300;
+            if(width < 380){
+                imageSize = 150;
+            }
+
+            if(height < 400){
+                imageSize = 80;
+            }
+
+            const imageStyle ={
+                width : imageSize,
+                height : imageSize,
+                borderRadius : imageSize / 2
+            }
+            
+            동적으로 크기를 지정해준다음
+            만약 미리 설정해둔 옵션과 병합해야 한다면 배열로 style을 지정해준다
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+            android / ios 각각 다른 화면이 보이게 해줘야할 때
 
 
 */
