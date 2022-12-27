@@ -180,5 +180,12 @@
             파일명에 확장자 .ios .android 가 붙어있으면 다른 플랫폼에서는 보이지 않는다
 
             
+            상태창 설정
+
+            npx expo install expo-status-bar
+
+            import { StatusBar } from 'expo-status-bar' 라고 강의에서 했는데 
+
+            import { StatusBar } from 'react-native'; 이렇게 자동완성이 되는데 작동하나 모르겠다
 
 */
