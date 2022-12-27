@@ -145,5 +145,40 @@
 
             android / ios 각각 다른 화면이 보이게 해줘야할 때
 
+            예를들어 
+
+            첫 시작화면에서(6.png 참고)
+            ios에서만 흰 테두리를 없애고 싶을 때 
+
+            import { Platform } from 'react-native';
+            현재 실행중인 플랫폼을 감지, 운영체제는 바뀌지 않기 때문에 동적 리스너는 필요없다
+
+            const styles = Style.create({
+                borderWidth: Platform.OS === 'android' ? 2 : 0,
+            })
+
+            또는
+
+            const styles = Style.create({
+                borderWidth: Platform.select({ios : 0, android: 2 }),
+            })
+
+            이렇게 사용해도 된다.
+
+            또는
+
+            플랫폼 별로 파일을 따로 관리해도된다.
+
+            Title.js를 android 전용 설정을 하려면
+            복사해서 Title.android.js 로 이름을 설정한 다음
+
+            해당 컴포넌트를 사용하는 곳에서 import 하면된다.
+            *** 주의
+            import 할때 확장자명을 확인하고 설정해줘야한다.
+
+            ex) import Title from '../파일 디렉토리 경로/Title'; 이렇게!!! 
+            파일명에 확장자 .ios .android 가 붙어있으면 다른 플랫폼에서는 보이지 않는다
+
+            
 
 */
