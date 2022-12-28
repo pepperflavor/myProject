@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "toyProjectApp",
-    "slug": "toyProjectApp",
+    "name": "foodOrder-App",
+    "slug": "foodOrder-App",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,16 +24,10 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.summer_jin.toyProjectApp"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "db1b034e-10b5-4aca-bd56-bebedfe74481"
-      }
     }
   }
 }
