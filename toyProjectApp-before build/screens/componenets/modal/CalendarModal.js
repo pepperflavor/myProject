@@ -3,8 +3,8 @@ import { format } from "date-fns";
 import { Calendar } from "react-native-calendars";
 import { StyleSheet, View } from "react-native";
 
-import Navibar from "./Navibar";
-import PrimaryButton from './../ui/PrimaryButton';
+import Navibar from "../../Navibar";
+import PrimaryButton from '../../../ui/PrimaryButton';
 
 function CalendarModal({ navigation }) {
   const posts = [

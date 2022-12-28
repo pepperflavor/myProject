@@ -1,7 +1,7 @@
 import { ImageBackground, StyleSheet, Text, View } from "react-native"
-import RoutinesOutput from "../components/Routine/RoutinesOutput";
+import RoutinesOutput from "../../../components/Routine/RoutinesOutput";
 import { useContext } from 'react';
-import { RoutineContext } from './../store/routine-context';
+import { RoutineContext } from '../../../store/routine-context';
 
 
 function MyRoutine(){
