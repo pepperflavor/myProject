@@ -1,0 +1,47 @@
+import { View, Text, Pressable, StyleSheet } from "react-native";
+
+// 커스텀 버튼
+function PrimaryButton({ children, onPress }) {
+  return (
+    <View style={styles.buttonOuterContainer}>
+      <Pressable
+        style={({ pressed }) => {
+          pressed
+            ? [styles.buttonInnerContainer, styles.pressed]
+            : styles.buttonInnerContainer;
+        }}
+        onPress={onPress}
+        android_ripple={{ color: "#640233" }}
+      >
+        <Text style={styles.buttonText}>{children}</Text>
+      </Pressable>
+    </View>
+  );
+}
+
+export default PrimaryButton;
+
+const styles = StyleSheet.create({
+  buttonOuterContainer: {
+    borderRadius: 28,
+    margin: 4,
+    overflow: "hidden",
+    backgroundColor: "#72063c",
+    alignContent: "center",
+  },
+  buttonInnerContainer: {
+    paddingVertical: 8, // 위아래 패딩을 같은 크기로 넣어줌
+    paddingHorizontal: 16,
+    elevation: 2,
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 8,
+    fontSize: 20,
+
+  },
+  pressed: {
+    opacity: 0.75,
+  },
+});
